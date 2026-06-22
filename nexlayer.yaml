@@ -1,0 +1,16 @@
+application:
+  name: chroma
+  pods:
+  - name: app
+    image: chromadb/chroma:latest
+    path: /
+    servicePorts:
+    - 8000
+    vars:
+      CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER: "chromadb.auth.token.TokenConfigServerAuthCredentialsProvider"
+      CHROMA_SERVER_AUTH_PROVIDER: "chromadb.auth.token.TokenAuthServerProvider"
+      CHROMA_SERVER_AUTH_CREDENTIALS: "nexlayer-token-auth"
+    volumes:
+    - name: chroma-data
+      mountPath: /chroma/chroma
+      size: 10Gi
