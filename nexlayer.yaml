@@ -2,11 +2,11 @@ application:
   name: chroma
   pods:
   - name: app
-    image: chroma-server:latest
+    image: ghcr.io/chroma-core/chroma:1.0.15
     path: /
     servicePorts:
     - 8000
     volumes:
     - name: chroma-data
-      mountPath: /chroma/chroma
+      mountPath: /data
       size: 10Gi

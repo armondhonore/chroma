@@ -1,12 +1,12 @@
 # Nexlayer build guidance
 
-Build from the simple root `Dockerfile` (`pip install chromadb`, run the chroma
-server). Do NOT generate a Chroma-from-source (rust/protoc/maturin) build — that
-build fails at `make -C idl proto_python` and is unnecessary; the pip package
-provides the server.
+Deploy the PREBUILT official image `ghcr.io/chroma-core/chroma:1.0.15` directly.
+Do NOT build Chroma from source (the generated rust/protoc/maturin build fails at
+`make -C idl proto_python`) and do NOT generate a Dockerfile — there is no
+Dockerfile in this branch on purpose so the pipeline deploys the image as-is.
 
-Chroma returns 404 at `/` by design and 410 for the deprecated `/api/v1`. The pod
-`path` is set to `/docs` (Swagger UI, 2xx/3xx) so the routed public path resolves.
-`/api/v2/heartbeat` returns 200.
+Chroma returns 404 at `/` by design and 410 for the deprecated `/api/v1`. The
+real health/landing paths are `/docs` (Swagger UI, 200/3xx) and
+`/api/v2/heartbeat` (200). Keep `path: /` and servicePort 8000.
 
 Pinned: true
