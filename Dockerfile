@@ -1,1 +1,1 @@
-FROM chromadb/chroma:latest
+FROM ghcr.io/chroma-core/chroma:latest
