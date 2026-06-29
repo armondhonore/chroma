@@ -3,7 +3,7 @@ application:
   pods:
   - name: app
     image: chroma-server:latest
-    path: /docs
+    path: /
     servicePorts:
     - 8000
     volumes:
