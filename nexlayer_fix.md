@@ -1,12 +1,12 @@
-# Nexlayer build guidance (do not regenerate Dockerfile)
+# Nexlayer build guidance
 
-The root `Dockerfile` is hand-authored: it installs Chroma plus nginx, and runs
-`nexlayer-start.sh`, which launches `chroma` on 127.0.0.1:8001 and puts nginx on
-:8000 in front. nginx redirects the bare `/` (which Chroma returns 404 for, by
-design) to `/docs` (Swagger UI, 200) and proxies everything else through to
-Chroma. This makes the public routed path resolve to a 3xx/2xx instead of 404.
+Build from the simple root `Dockerfile` (`pip install chromadb`, run the chroma
+server). Do NOT generate a Chroma-from-source (rust/protoc/maturin) build — that
+build fails at `make -C idl proto_python` and is unnecessary; the pip package
+provides the server.
 
-Do NOT regenerate the Dockerfile. Do NOT drop nginx or the redirect. Keep
-servicePort 8000 and `path: /`.
+Chroma returns 404 at `/` by design and 410 for the deprecated `/api/v1`. The pod
+`path` is set to `/docs` (Swagger UI, 2xx/3xx) so the routed public path resolves.
+`/api/v2/heartbeat` returns 200.
 
 Pinned: true
