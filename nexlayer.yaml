@@ -2,7 +2,7 @@ application:
   name: chroma
   pods:
   - name: app
-    image: chromadb/chroma:latest
+    image: ghcr.io/chroma-core/chroma:latest
     path: /
     servicePorts:
     - 8000
