@@ -3,7 +3,7 @@ application:
   pods:
   - name: app
     image: ghcr.io/chroma-core/chroma:1.0.15
-    path: /docs
+    path: /api/v2
     servicePorts:
     - 8000
     volumes:
